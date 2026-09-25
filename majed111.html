@@ -1,0 +1,2724 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATHAR STORE | أثر ستور</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+    background:#090909;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+    height:70px;
+    background:#0d0d0d;
+    border-bottom:1px solid #292929;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    z-index:1000;
+    box-shadow:0 5px 20px rgba(0,0,0,.5);
+}
+
+.logo{
+    color:#d4af5a;
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.cart-button{
+    background:#111;
+    color:#d4af5a;
+    border:1px solid #d4af5a;
+    padding:10px 17px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.cart-button:hover{
+    background:#d4af5a;
+    color:#000;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    position:fixed;
+    top:70px;
+    right:0;
+    bottom:0;
+    width:220px;
+    background:#0d0d0d;
+    border-left:1px solid #292929;
+    padding:25px 15px;
+    z-index:900;
+}
+
+.sidebar button{
+    width:100%;
+    background:transparent;
+    color:#ddd;
+    border:1px solid #242424;
+    padding:14px 10px;
+    margin-bottom:10px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.25s;
+}
+
+.sidebar button:hover,
+.sidebar button.active{
+    background:#d4af5a;
+    color:#000;
+}
+
+/* ================= MAIN ================= */
+
+main{
+    margin-right:220px;
+    padding-top:70px;
+}
+
+.page{
+    display:none;
+    padding:35px;
+    min-height:calc(100vh - 70px);
+}
+
+.page.active{
+    display:block;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:430px;
+    border:1px solid #292929;
+    border-radius:20px;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(212,175,90,.15),
+            transparent 35%
+        ),
+        linear-gradient(135deg,#111,#090909);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px;
+    margin-bottom:35px;
+}
+
+.hero-content h1{
+    color:#d4af5a;
+    font-size:55px;
+    margin-bottom:15px;
+    letter-spacing:2px;
+}
+
+.hero-content h2{
+    font-size:25px;
+    margin-bottom:15px;
+}
+
+.hero-content p{
+    color:#aaa;
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* ================= TITLES ================= */
+
+.section-title{
+    color:#d4af5a;
+    font-size:30px;
+    margin-bottom:25px;
+    text-align:center;
+}
+
+.back-button{
+    background:#111;
+    color:#d4af5a;
+    border:1px solid #d4af5a;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-bottom:25px;
+}
+
+.back-button:hover{
+    background:#d4af5a;
+    color:#000;
+}
+
+/* ================= PERFUME COMPANIES ================= */
+
+.perfume-companies{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    padding:10px 5px 25px;
+    direction:rtl;
+}
+
+.perfume-companies::-webkit-scrollbar{
+    height:7px;
+}
+
+.perfume-companies::-webkit-scrollbar-track{
+    background:#111;
+    border-radius:10px;
+}
+
+.perfume-companies::-webkit-scrollbar-thumb{
+    background:#d4af5a;
+    border-radius:10px;
+}
+
+.company-card{
+    position:relative;
+    flex:0 0 200px;
+    height:150px;
+    background:#111;
+    border:1px solid #383838;
+    border-radius:15px;
+    color:#d4af5a;
+    font-size:21px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:0 5px 20px rgba(0,0,0,.3);
+    overflow:hidden;
+    padding:0;
+}
+
+.company-card:hover{
+    transform:translateY(-5px);
+    border-color:#d4af5a;
+    box-shadow:0 10px 30px rgba(212,175,90,.18);
+}
+
+.company-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    opacity:.78;
+    transition:.3s;
+}
+
+.company-card:hover img{
+    transform:scale(1.06);
+    opacity:.9;
+}
+
+.company-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.95),
+        rgba(0,0,0,.1)
+    );
+}
+
+.company-card span{
+    position:absolute;
+    z-index:2;
+    bottom:15px;
+    right:0;
+    left:0;
+    text-align:center;
+    color:#d4af5a;
+    text-shadow:0 2px 8px #000;
+}
+
+/* ================= PRODUCTS ================= */
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+    gap:20px;
+}
+
+.product-card{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.25s;
+    padding-bottom:15px;
+    cursor:pointer;
+}
+
+.product-card:hover{
+    transform:translateY(-5px);
+    border-color:#d4af5a;
+}
+
+.product-image{
+    width:100%;
+    height:220px;
+    display:block;
+    background:#151515;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+    background:#151515;
+    padding:8px;
+}
+
+.product-placeholder{
+    width:100%;
+    height:220px;
+    background:radial-gradient(circle,#292929,#101010);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#555;
+    font-size:14px;
+}
+
+.product-info{
+    padding:15px;
+}
+
+.product-name{
+    font-size:17px;
+    min-height:48px;
+    line-height:1.5;
+    margin-bottom:10px;
+}
+
+.price{
+    color:#d4af5a;
+    font-size:19px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.product-button{
+    width:100%;
+    padding:10px;
+    background:#d4af5a;
+    color:#000;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.product-button:hover{
+    background:#fff;
+}
+
+/* ================= SEARCH ================= */
+
+.search-box{
+    max-width:700px;
+    margin:0 auto 30px;
+}
+
+.search-box input{
+    width:100%;
+    background:#111;
+    border:1px solid #333;
+    color:#fff;
+    padding:16px;
+    border-radius:12px;
+    outline:none;
+    font-size:17px;
+}
+
+.search-box input:focus{
+    border-color:#d4af5a;
+}
+
+/* ================= CART ================= */
+
+.cart-panel{
+    position:fixed;
+    top:0;
+    left:-420px;
+    width:400px;
+    max-width:95%;
+    height:100vh;
+    background:#0d0d0d;
+    border-right:1px solid #333;
+    z-index:2000;
+    padding:25px;
+    transition:.3s;
+    overflow-y:auto;
+    box-shadow:5px 0 30px rgba(0,0,0,.6);
+}
+
+.cart-panel.open{
+    left:0;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #292929;
+    padding-bottom:15px;
+    margin-bottom:20px;
+}
+
+.cart-header h2{
+    color:#d4af5a;
+}
+
+.close-cart{
+    background:none;
+    color:#fff;
+    border:none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    border-bottom:1px solid #242424;
+    padding:15px 0;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-name{
+    font-size:15px;
+    line-height:1.5;
+}
+
+.cart-item-price{
+    color:#d4af5a;
+    margin-top:5px;
+}
+
+.remove-item{
+    background:#1a1a1a;
+    color:#f66;
+    border:1px solid #333;
+    border-radius:7px;
+    padding:5px 9px;
+    cursor:pointer;
+}
+
+/* ================= DELIVERY / TOTAL ================= */
+
+.cart-summary{
+    margin-top:25px;
+    border-top:1px solid #292929;
+    padding-top:15px;
+}
+
+.cart-summary-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:7px 0;
+    color:#bbb;
+}
+
+.cart-summary-row strong{
+    color:#fff;
+}
+
+.cart-summary-row.delivery strong{
+    color:#d4af5a;
+}
+
+.cart-summary-row.final{
+    margin-top:8px;
+    padding-top:13px;
+    border-top:1px solid #333;
+    font-size:22px;
+}
+
+.cart-summary-row.final strong{
+    color:#d4af5a;
+}
+
+.delivery-note{
+    margin-top:12px;
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:10px;
+    padding:12px;
+    color:#aaa;
+    line-height:1.7;
+    font-size:13px;
+    text-align:center;
+}
+
+.cart-total{
+    margin-top:25px;
+    font-size:21px;
+    color:#d4af5a;
+    font-weight:bold;
+}
+
+.checkout{
+    width:100%;
+    background:#25D366;
+    color:#000;
+    border:none;
+    padding:14px;
+    border-radius:10px;
+    margin-top:20px;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.empty-cart{
+    color:#888;
+    text-align:center;
+    padding:40px 0;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    margin-right:220px;
+    background:#0d0d0d;
+    border-top:1px solid #292929;
+    text-align:center;
+    padding:30px 20px;
+    color:#888;
+}
+
+footer strong{
+    color:#d4af5a;
+}
+
+/* ================= FULL PRODUCT PAGE ================= */
+
+.product-page-overlay{
+    position:fixed;
+    inset:0;
+    background:#080808;
+    z-index:99999;
+    overflow-y:auto;
+    display:none;
+}
+
+.product-page-overlay.show{
+    display:block;
+}
+
+.product-page{
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at 80% 15%,
+            rgba(212,175,55,.10),
+            transparent 28%
+        ),
+        linear-gradient(180deg,#0b0b0b,#111);
+    color:#fff;
+    padding:30px 6vw 60px;
+}
+
+.product-page-top{
+    max-width:1200px;
+    margin:0 auto 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.product-page-back,
+.product-page-close{
+    border:1px solid rgba(212,175,55,.55);
+    background:#151515;
+    color:#d4af37;
+    padding:11px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.product-page-brand{
+    color:#d4af37;
+    font-weight:800;
+    letter-spacing:2px;
+    font-size:20px;
+}
+
+.product-page-main{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.05fr 1fr;
+    gap:55px;
+    align-items:start;
+}
+
+.product-gallery{
+    background:linear-gradient(145deg,#151515,#0b0b0b);
+    border:1px solid rgba(212,175,55,.25);
+    border-radius:22px;
+    padding:22px;
+}
+
+.product-main-image-wrap{
+    height:540px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#101010;
+    border-radius:17px;
+    overflow:hidden;
+}
+
+.product-main-image{
+    width:100%;
+    height:100%;
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    padding:15px;
+    display:block;
+}
+
+.product-thumbnails{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.product-thumb{
+    width:78px;
+    height:78px;
+    border:1px solid rgba(212,175,55,.3);
+    border-radius:10px;
+    background:#111;
+    overflow:hidden;
+    cursor:pointer;
+    padding:4px;
+}
+
+.product-thumb.active{
+    border-color:#d4af37;
+    box-shadow:0 0 0 1px #d4af37;
+}
+
+.product-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.product-page-info{
+    padding:15px 0;
+}
+
+.product-page-label{
+    color:#d4af37;
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:10px;
+}
+
+.product-page-title{
+    font-size:42px;
+    margin:0 0 18px;
+    font-weight:800;
+}
+
+.product-page-price{
+    font-size:27px;
+    color:#d4af37;
+    font-weight:800;
+    margin:20px 0;
+}
+
+.product-page-description{
+    color:#d6d6d6;
+    line-height:2;
+    font-size:17px;
+    margin:20px 0 28px;
+}
+
+.product-page-details{
+    border-top:1px solid rgba(255,255,255,.12);
+    border-bottom:1px solid rgba(255,255,255,.12);
+    padding:18px 0;
+    margin-bottom:25px;
+}
+
+.product-page-detail-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:9px 0;
+    color:#ccc;
+}
+
+.product-page-detail-row strong{
+    color:#fff;
+}
+
+.product-page-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.product-page-add,
+.product-page-whatsapp{
+    border:0;
+    padding:14px 24px;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:800;
+    font-size:16px;
+}
+
+.product-page-add{
+    background:#d4af37;
+    color:#080808;
+}
+
+.product-page-whatsapp{
+    background:#151515;
+    color:#d4af37;
+    border:1px solid #d4af37;
+}
+
+.no-image{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#555;
+    font-size:18px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    header{
+        padding:0 15px;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    .sidebar{
+        width:100%;
+        height:auto;
+        top:70px;
+        bottom:auto;
+        right:0;
+        display:flex;
+        overflow-x:auto;
+        padding:10px;
+        border-left:none;
+        border-bottom:1px solid #292929;
+    }
+
+    .sidebar button{
+        min-width:120px;
+        margin:0 5px;
+        white-space:nowrap;
+    }
+
+    main{
+        margin-right:0;
+        padding-top:125px;
+    }
+
+    footer{
+        margin-right:0;
+    }
+
+    .page{
+        padding:20px 15px;
+    }
+
+    .hero{
+        min-height:350px;
+    }
+
+    .hero-content h1{
+        font-size:38px;
+    }
+
+    .hero-content h2{
+        font-size:21px;
+    }
+
+    .company-card{
+        flex-basis:160px;
+        height:130px;
+    }
+
+    .products-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .product-name{
+        font-size:14px;
+    }
+
+    .product-image,
+    .product-placeholder{
+        height:180px;
+    }
+
+    .product-image img{
+        padding:6px;
+    }
+
+    .product-page-main{
+        grid-template-columns:1fr;
+        gap:25px;
+    }
+
+    .product-main-image-wrap{
+        height:400px;
+    }
+
+    .product-page-title{
+        font-size:32px;
+    }
+
+    .product-page{
+        padding:20px 16px 45px;
+    }
+}
+
+@media(max-width:450px){
+
+    .products-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cart-panel{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        ATHAR STORE
+    </div>
+
+    <button
+        class="cart-button"
+        onclick="toggleCart()">
+
+        🛒 السلة
+        (<span id="cartCount">0</span>)
+
+    </button>
+
+</header>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<nav class="sidebar">
+
+    <button
+        class="active"
+        onclick="showPage('home',this)">
+        الرئيسية
+    </button>
+
+    <button
+        onclick="showPage('searchPage',this)">
+        البحث
+    </button>
+
+    <button
+        onclick="
+        showPage('perfumes',this);
+        showPerfumeCompanies();
+        ">
+        العطور
+    </button>
+
+    <button
+        onclick="showPage('cups',this)">
+        الكاسات
+    </button>
+
+    <button
+        onclick="showPage('gifts',this)">
+        الهدايا
+    </button>
+
+    <button
+        onclick="showPage('printing',this)">
+        الطباعة
+    </button>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<main>
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="page active">
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                ATHAR STORE
+            </h1>
+
+            <h2>
+                أثر يبقى معك
+            </h2>
+
+            <p>
+                عطور، هدايا، كاسات مخصصة، وطباعة حسب الطلب
+                <br>
+                كل شيء بتفاصيل مميزة ولمسة فاخرة.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">
+        منتجات مميزة
+    </h2>
+
+    <div
+        id="featuredProducts"
+        class="products-grid">
+    </div>
+
+    <br><br>
+
+    <div
+        id="otherProducts"
+        class="products-grid">
+    </div>
+
+</section>
+
+
+<!-- ================= PERFUMES ================= -->
+
+<section id="perfumes" class="page">
+
+    <h2 class="section-title">
+        عالم العطور
+    </h2>
+
+    <div id="companySection">
+
+        <div class="perfume-companies">
+
+            <!-- HAWAS -->
+
+            <button
+                class="company-card"
+                onclick="showPerfumeCategory('Hawas')">
+
+                <img
+                    src="هوس.jpg"
+                    alt="Hawas">
+
+                <span>
+                    Hawas
+                </span>
+
+            </button>
+
+
+            <!-- ASSAF -->
+
+            <button
+                class="company-card"
+                onclick="showPerfumeCategory('Assaf')">
+
+                <img
+                    src="assaf.webp"
+                    alt="Assaf">
+
+                <span>
+                    Assaf
+                </span>
+
+            </button>
+
+
+            <!-- AFNAN -->
+
+            <button
+                class="company-card"
+                onclick="showPerfumeCategory('Afnan')">
+
+                <img
+                    src="afnan.png"
+                    alt="Afnan">
+
+                <span>
+                    Afnan
+                </span>
+
+            </button>
+
+
+            <!-- ASSAF PACKAGES -->
+
+            <button
+                class="company-card"
+                onclick="showPerfumeCategory('AssafPackages')">
+
+                <img
+                    src="assaf pack"
+                    alt="Assaf Packages">
+
+                <span>
+                    Assaf Packages
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCTS AFTER CATEGORY -->
+
+    <div
+        id="perfumeProductsSection"
+        style="display:none;">
+
+        <button
+            class="back-button"
+            onclick="showPerfumeCompanies()">
+
+            ← العودة إلى شركات العطور
+
+        </button>
+
+        <h2
+            id="perfumeCategoryTitle"
+            class="section-title">
+        </h2>
+
+        <div
+            id="perfumeProducts"
+            class="products-grid">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CUPS ================= -->
+
+<section id="cups" class="page">
+
+    <h2 class="section-title">
+        الكاسات
+    </h2>
+
+    <div
+        id="cupsProducts"
+        class="products-grid">
+    </div>
+
+</section>
+
+
+<!-- ================= GIFTS ================= -->
+
+<section id="gifts" class="page">
+
+    <h2 class="section-title">
+        الهدايا
+    </h2>
+
+    <div
+        id="giftsProducts"
+        class="products-grid">
+    </div>
+
+</section>
+
+
+<!-- ================= PRINTING ================= -->
+
+<section id="printing" class="page">
+
+    <h2 class="section-title">
+        الطباعة والتخصيص
+    </h2>
+
+    <div
+        id="printingProducts"
+        class="products-grid">
+    </div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<section id="searchPage" class="page">
+
+    <h2 class="section-title">
+        ابحث عن منتج
+    </h2>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="اكتب اسم المنتج..."
+            oninput="searchProducts()">
+
+    </div>
+
+    <div
+        id="searchResults"
+        class="products-grid">
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        <strong>
+            ATHAR STORE
+        </strong>
+    </p>
+
+    <p>
+        عطور • هدايا • كاسات • طباعة
+    </p>
+
+    <p>
+        جميع الحقوق محفوظة © 2026
+    </p>
+
+</footer>
+
+
+<!-- ================= CART ================= -->
+
+<div
+    id="cartPanel"
+    class="cart-panel">
+
+    <div class="cart-header">
+
+        <h2>
+            سلة المشتريات
+        </h2>
+
+        <button
+            class="close-cart"
+            onclick="toggleCart()">
+            ×
+        </button>
+
+    </div>
+
+
+    <div id="cartItems"></div>
+
+
+    <div
+        id="cartSummary"
+        class="cart-summary">
+    </div>
+
+
+    <div class="delivery-note">
+
+        🚚 التوصيل للضفة والقدس:
+        <strong>20 ₪</strong>
+        <br>
+
+        🎁 الطلبات فوق
+        <strong>300 ₪</strong>
+        تحصل على توصيل مجاني
+
+    </div>
+
+
+    <button
+        class="checkout"
+        onclick="checkoutWhatsApp()">
+
+        إتمام الطلب عبر واتساب
+
+    </button>
+
+</div>
+
+
+<!-- ================= FULL PRODUCT PAGE ================= -->
+
+<div
+    id="productPageOverlay"
+    class="product-page-overlay">
+
+    <div class="product-page">
+
+        <div class="product-page-top">
+
+            <button
+                class="product-page-back"
+                type="button"
+                onclick="closeProductPage()">
+
+                ← العودة للمتجر
+
+            </button>
+
+            <div class="product-page-brand">
+                ATHAR STORE
+            </div>
+
+            <button
+                class="product-page-close"
+                type="button"
+                onclick="closeProductPage()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="productPageContent">
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ================= HAWAS ================= */
+
+const hawasProducts = [
+
+    ["Hawas Chrome",140,"Chrome.jpg"],
+    ["Hawas Kobra",100,"kobra.jpg"],
+    ["Hawas Malibu",100,"Malibu.jpg"],
+    ["Hawas For Him",100,"For him.jpg"],
+    ["Hawas Exotic",150,"Exotic.jpg"],
+    ["Hawas Elixir",100,"Elixir.jpg"],
+    ["Hawas Atlantis",120,"Atlantis.jpg"],
+    ["Hawas Tropical",100,"Tropical.jpg"],
+    ["Hawas Ice",100,"Ice.png"],
+    ["Hawas Black",100,"Black.jpg"],
+    ["Hawas Viper",120,"Viper.jpg"],
+    ["Hawas Lava Gold",130,"Lava gold.jpg"],
+    ["Hawas Fire",120,"Fire.jpg"],
+    ["Hawas Majestic",130,"Majestic.jpg"],
+    ["Hawas London",120,"London.jpg"],
+    ["Hawas Eclat",120,"Eclat.jpg"],
+    ["Hawas Reina",150,"Reina.jpg"],
+    ["Hawas Diva",100,"Diva.jpg"],
+    ["Hawas Pink",100,"Pink.jpg"],
+    ["Hawas For Her",100,"For her.jpg"]
+
+];
+
+
+/* ================= ASSAF ================= */
+
+const assafPerfumes = [
+
+    ["ASSAF FRANKEL IMAGINATION PERFUME 100ml",130,"imagintoin.webp"],
+    ["ASSAF FRANKEL IMAGINATION PERFUME 200ml",160,"imag200.jpg"],
+    ["Assaf Frankel Black Elixir",180,"black elixir.jpg"],
+    ["Assaf Frankel Aventus Intense 200ml",170,"aventus.jpg"],
+    ["ASSAF Frankel Beach Afternoon 200ml",160,"afternoon.jpg"],
+    ["ASSAF FRANKEL SILVER 200ml",150,"silver200.jpg"],
+    ["Assaf Frankel Blue Elixir",180,"blue elixir.jpg"],
+    ["ASSAF Frankel Afternoon 100ml",130,"ASSAF Frankel Afternoon 100ml.webp"],
+    ["Assaf Frankel Chill",160,"chill.jpg"],
+    ["Assaf Frankel Silver 100ml",130,"selver200.webp"],
+    ["Frankel Storm Assaf 100ml",150,"storm.jpg"]
+
+];
+
+
+/* ================= ASSAF PACKAGES ================= */
+
+const assafPackages = [
+
+    ["ASSAF Discovery Box (8x25ml)",250,"Assaf Discovery Box Collection Set Of 8x25ml.webp"],
+    ["ASSAF Samples Box (6x5ml)",90,"ASSAF Samples Box (6x5ml).webp"],
+    ["Assaf Aura Perfume Set",180,"aura set.webp"],
+    ["MISS ASSAF Collection",389,"MISS ASSAF Collection.jpg"],
+    ["Assaf Bakhur Collection",245,"Assaf Bakhur Collection.webp"],
+    ["Assaf Musk Collection",280,"Assaf Musk Collection.webp"],
+    ["Assaf Arrogate Perfumes",100,"Assaf Arrogate Perfumes.jpg"],
+    ["Assaf Frankel Collection (25ml × 3)",130,"Assaf Frankel Collection (25ml × 3).webp"],
+    ["Assaf Perfumes Lady Collection (25ml × 3)",130,"Assaf Perfumes Lady Collection.jpg"],
+    ["ASSAF Samples Box (7.5ml × 15)",180,"ASSAF Samples Box (7.5ml × 15).webp"],
+    ["Arrogate Collection (25ml × 3)",135,"Arrogate Collection (25ml × 3).webp"],
+    
+];
+
+
+/* ================= AFNAN ================= */
+
+const afnanProducts = [
+
+    ["Afnan 9 PM Elixir",120,"Afnan 9 PM Elixir.webp"],
+    ["Afnan 9 PM Rebel",130,"Afnan 9 PM Rebel.webp"],
+    ["Afnan 9 PM Night Out EDP",150,"Afnan 9 PM Night Out EDP.jpg"],
+    ["Afnan 9 AM Dive 100ml",130,"dive.webp"],
+    ["Afnan 9 AM",100,"Afnan 9 AM  .webp"],
+    ["Afnan 9 PM Perfume for Men",120,"Afnan 9 PM Perfume for Men.jpg"],
+    ["Afnan Supremacy Collector's Edition",150,"Afnan Supremacy Collector's Edition.webp"],
+    
+];
+
+
+/* ================= CUPS ================= */
+
+const cupsProducts = [
+
+    ["كوب مخصص",35,null],
+    ["كوب حراري مخصص",45,null]
+
+];
+
+
+/* ================= GIFTS ================= */
+
+const giftsProducts = [
+
+    ["هدية مميزة",60,null]
+
+];
+
+
+/* ================= PRINTING ================= */
+
+const printingProducts = [
+
+    ["طباعة مخصصة",null,null]
+
+];
+
+
+/* ================= ALL PRODUCTS ================= */
+
+let allProducts = [
+
+    ...hawasProducts,
+    ...assafPerfumes,
+    ...assafPackages,
+    ...afnanProducts,
+    ...cupsProducts,
+    ...giftsProducts,
+    ...printingProducts
+
+];
+
+
+/* ================= PAGE SYSTEM ================= */
+
+function showPage(pageId,button){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page=>{
+            page.classList.remove("active");
+        });
+
+    const page =
+        document.getElementById(pageId);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+    document
+        .querySelectorAll(".sidebar button")
+        .forEach(btn=>{
+            btn.classList.remove("active");
+        });
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* ================= PERFUME COMPANIES ================= */
+
+function showPerfumeCompanies(){
+
+    document
+        .getElementById("companySection")
+        .style.display="block";
+
+    document
+        .getElementById("perfumeProductsSection")
+        .style.display="none";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* ================= PERFUME CATEGORY ================= */
+
+function showPerfumeCategory(category){
+
+    let products=[];
+    let title="";
+
+    if(category==="Hawas"){
+        products=hawasProducts;
+        title="Hawas";
+    }
+
+    else if(category==="Assaf"){
+        products=assafPerfumes;
+        title="Assaf";
+    }
+
+    else if(category==="Afnan"){
+        products=afnanProducts;
+        title="Afnan";
+    }
+
+    else if(category==="AssafPackages"){
+        products=assafPackages;
+        title="Assaf Packages";
+    }
+
+    document
+        .getElementById("companySection")
+        .style.display="none";
+
+    document
+        .getElementById("perfumeProductsSection")
+        .style.display="block";
+
+    document
+        .getElementById("perfumeCategoryTitle")
+        .textContent=title;
+
+    const container =
+        document.getElementById("perfumeProducts");
+
+    container.innerHTML="";
+
+    products.forEach(product=>{
+
+        container.innerHTML +=
+            createProductCard(
+                product[0],
+                product[1],
+                product[2]
+            );
+
+    });
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* ================= ESCAPE ================= */
+
+function escapeQuotes(text){
+
+    return String(text)
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'")
+        .replace(/"/g,"&quot;");
+
+}
+
+
+/* ================= PRODUCT CARD ================= */
+
+function createProductCard(name,price,image){
+
+    const safeName =
+        escapeQuotes(name);
+
+    const safeImage =
+        image
+        ? `'${escapeQuotes(image)}'`
+        : "null";
+
+    return `
+
+        <div
+            class="product-card"
+            onclick="openProductPage(
+                '${safeName}',
+                ${price===null ? "null" : price},
+                ${safeImage}
+            )">
+
+            <div class="product-image">
+
+                ${
+                    image
+
+                    ?
+
+                    `<img
+                        src="${image}"
+                        alt="${safeName}"
+                        loading="lazy"
+                    >`
+
+                    :
+
+                    `<div class="no-image">
+                        ATHAR STORE
+                    </div>`
+                }
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    ${name}
+                </div>
+
+                <div class="price">
+
+                    ${
+                        price===null
+                        ?
+                        "السعر حسب الطلب"
+                        :
+                        price+" ₪"
+                    }
+
+                </div>
+
+
+                <button
+                    class="product-button"
+                    style="position:relative;z-index:3"
+                    onclick="
+                        event.stopPropagation();
+                        addToCart(
+                            '${safeName}',
+                            ${price===null ? "null" : price}
+                        );
+                    ">
+
+                    أضف إلى السلة
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+/* ================= SHUFFLE ================= */
+
+function shuffleArray(array){
+
+    return [...array]
+        .sort(()=>Math.random()-0.5);
+
+}
+
+
+/* ================= FEATURED ================= */
+
+function renderFeatured(){
+
+    const container =
+        document.getElementById(
+            "featuredProducts"
+        );
+
+    const featured =
+        shuffleArray(allProducts)
+        .slice(0,6);
+
+    container.innerHTML="";
+
+    featured.forEach(product=>{
+
+        container.innerHTML +=
+            createProductCard(
+                product[0],
+                product[1],
+                product[2]
+            );
+
+    });
+
+}
+
+
+/* ================= OTHER PRODUCTS ================= */
+
+function renderOtherProducts(){
+
+    const container =
+        document.getElementById(
+            "otherProducts"
+        );
+
+    const products =
+        shuffleArray(allProducts)
+        .slice(0,10);
+
+    container.innerHTML="";
+
+    products.forEach(product=>{
+
+        container.innerHTML +=
+            createProductCard(
+                product[0],
+                product[1],
+                product[2]
+            );
+
+    });
+
+}
+
+
+/* ================= CUPS ================= */
+
+function renderCups(){
+
+    const container =
+        document.getElementById(
+            "cupsProducts"
+        );
+
+    container.innerHTML="";
+
+    cupsProducts.forEach(product=>{
+
+        container.innerHTML +=
+            createProductCard(
+                product[0],
+                product[1],
+                product[2]
+            );
+
+    });
+
+}
+
+
+/* ================= GIFTS ================= */
+
+function renderGifts(){
+
+    const container =
+        document.getElementById(
+            "giftsProducts"
+        );
+
+    container.innerHTML="";
+
+    giftsProducts.forEach(product=>{
+
+        container.innerHTML +=
+            createProductCard(
+                product[0],
+                product[1],
+                product[2]
+            );
+
+    });
+
+}
+
+
+/* ================= PRINTING ================= */
+
+function renderPrinting(){
+
+    const container =
+        document.getElementById(
+            "printingProducts"
+        );
+
+    container.innerHTML="";
+
+    printingProducts.forEach(product=>{
+
+        container.innerHTML +=
+            createProductCard(
+                product[0],
+                product[1],
+                product[2]
+            );
+
+    });
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchProducts(){
+
+    const input =
+        document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase()
+            .trim();
+
+    const container =
+        document.getElementById(
+            "searchResults"
+        );
+
+    container.innerHTML="";
+
+    if(input===""){
+        return;
+    }
+
+    const results =
+        allProducts.filter(product=>
+            product[0]
+                .toLowerCase()
+                .includes(input)
+        );
+
+    if(results.length===0){
+
+        container.innerHTML=`
+
+            <div style="
+                grid-column:1/-1;
+                text-align:center;
+                color:#888;
+                padding:50px;
+            ">
+
+                لا يوجد منتج بهذا الاسم
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+    results.forEach(product=>{
+
+        container.innerHTML +=
+            createProductCard(
+                product[0],
+                product[1],
+                product[2]
+            );
+
+    });
+
+}
+
+
+/* =====================================================
+   CART
+===================================================== */
+
+let cart=[];
+
+
+function addToCart(name,price){
+
+    cart.push({
+        name:name,
+        price:price
+    });
+
+    updateCart();
+
+    toggleCart();
+
+}
+
+
+function removeFromCart(index){
+
+    cart.splice(index,1);
+
+    updateCart();
+
+}
+
+
+/* =====================================================
+   CALCULATE DELIVERY
+===================================================== */
+
+function calculateCart(){
+
+    let subtotal=0;
+
+    let hasUnknownPrice=false;
+
+    cart.forEach(item=>{
+
+        if(typeof item.price === "number"){
+            subtotal += item.price;
+        }
+
+        else{
+            hasUnknownPrice=true;
+        }
+
+    });
+
+
+    if(hasUnknownPrice){
+
+        return {
+            subtotal:subtotal,
+            delivery:null,
+            total:null,
+            unknown:true
+        };
+
+    }
+
+
+    const delivery =
+        subtotal > 300
+        ? 0
+        : 20;
+
+
+    return {
+        subtotal:subtotal,
+        delivery:delivery,
+        total:subtotal+delivery,
+        unknown:false
+    };
+
+}
+
+
+/* =====================================================
+   UPDATE CART
+===================================================== */
+
+function updateCart(){
+
+    document
+        .getElementById("cartCount")
+        .textContent=cart.length;
+
+
+    const container =
+        document.getElementById(
+            "cartItems"
+        );
+
+
+    const summary =
+        document.getElementById(
+            "cartSummary"
+        );
+
+
+    if(cart.length===0){
+
+        container.innerHTML=`
+
+            <div class="empty-cart">
+                السلة فارغة
+            </div>
+
+        `;
+
+        summary.innerHTML="";
+
+        return;
+    }
+
+
+    container.innerHTML="";
+
+
+    cart.forEach((item,index)=>{
+
+        container.innerHTML += `
+
+            <div class="cart-item">
+
+                <div class="cart-item-info">
+
+                    <div class="cart-item-name">
+                        ${item.name}
+                    </div>
+
+                    <div class="cart-item-price">
+
+                        ${
+                            item.price===null
+                            ?
+                            "السعر حسب الطلب"
+                            :
+                            item.price+" ₪"
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="remove-item"
+                    onclick="removeFromCart(${index})">
+
+                    حذف
+
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+
+    const cartData =
+        calculateCart();
+
+
+    if(cartData.unknown){
+
+        summary.innerHTML=`
+
+            <div class="cart-summary-row">
+
+                <span>
+                    المنتجات
+                </span>
+
+                <strong>
+                    ${cartData.subtotal} ₪ +
+                    منتجات بسعر حسب الطلب
+                </strong>
+
+            </div>
+
+
+            <div class="cart-summary-row delivery">
+
+                <span>
+                    التوصيل
+                </span>
+
+                <strong>
+                    يحدد بعد تأكيد السعر
+                </strong>
+
+            </div>
+
+
+            <div class="cart-summary-row final">
+
+                <span>
+                    الإجمالي
+                </span>
+
+                <strong>
+                    يحدد بعد تأكيد السعر
+                </strong>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    summary.innerHTML=`
+
+        <div class="cart-summary-row">
+
+            <span>
+                المنتجات
+            </span>
+
+            <strong>
+                ${cartData.subtotal} ₪
+            </strong>
+
+        </div>
+
+
+        <div class="cart-summary-row delivery">
+
+            <span>
+                التوصيل
+            </span>
+
+            <strong>
+
+                ${
+                    cartData.delivery===0
+                    ?
+                    "مجاني"
+                    :
+                    "20 ₪"
+                }
+
+            </strong>
+
+        </div>
+
+
+        <div class="cart-summary-row final">
+
+            <span>
+                الإجمالي
+            </span>
+
+            <strong>
+                ${cartData.total} ₪
+            </strong>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ================= TOGGLE CART ================= */
+
+function toggleCart(){
+
+    document
+        .getElementById("cartPanel")
+        .classList.toggle("open");
+
+}
+
+
+/* ================= WHATSAPP PRICE ================= */
+
+function requestPrice(product){
+
+    const number =
+        "972535474380";
+
+    const message =
+        `مرحباً، أريد معرفة سعر المنتج:
+
+${product}`;
+
+
+    const url =
+        "https://wa.me/" +
+        number +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =====================================================
+   WHATSAPP CHECKOUT
+===================================================== */
+
+function checkoutWhatsApp(){
+
+    if(cart.length===0){
+
+        alert("السلة فارغة");
+
+        return;
+    }
+
+
+    const number =
+        "972535474380";
+
+
+    let message =
+        "مرحباً، أريد طلب المنتجات التالية من ATHAR STORE:\n\n";
+
+
+    cart.forEach((item,index)=>{
+
+        message +=
+            `${index+1}. ${item.name}`;
+
+
+        if(item.price===null){
+
+            message +=
+                " - السعر حسب الطلب\n";
+
+        }
+
+        else{
+
+            message +=
+                ` - ${item.price} ₪\n`;
+
+        }
+
+    });
+
+
+    const cartData =
+        calculateCart();
+
+
+    message +=
+        `\n--------------------\n`;
+
+
+    message +=
+        `مجموع المنتجات: ${cartData.subtotal} ₪\n`;
+
+
+    if(cartData.unknown){
+
+        message +=
+            "التوصيل: يحدد بعد تأكيد الأسعار\n";
+
+        message +=
+            "الإجمالي: يحدد بعد تأكيد الأسعار";
+
+    }
+
+    else{
+
+        if(cartData.delivery===0){
+
+            message +=
+                "التوصيل: مجاني\n";
+
+        }
+
+        else{
+
+            message +=
+                "التوصيل: 20 ₪\n";
+
+        }
+
+
+        message +=
+            `الإجمالي النهائي: ${cartData.total} ₪`;
+
+    }
+
+
+    const url =
+        "https://wa.me/" +
+        number +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =====================================================
+   PRODUCT DESCRIPTIONS
+===================================================== */
+
+function getProductDescription(name){
+
+    const descriptions = {
+
+        "Hawas Chrome":
+        "عطر مميز بطابع منعش وحضور أنيق، مناسب للاستخدام اليومي والمناسبات.",
+
+        "Hawas Kobra":
+        "تركيبة عطرية بطابع جذاب وحضور واضح، خيار مميز لمحبي الروائح القوية.",
+
+        "Hawas Malibu":
+        "رائحة منعشة وأنيقة تمنحك حضوراً مميزاً طوال اليوم.",
+
+        "Hawas For Him":
+        "عطر أنيق بطابع رجولي مميز، مناسب لمن يبحث عن رائحة عملية وفخمة.",
+
+        "Hawas Exotic":
+        "تركيبة مميزة بطابع غني وحضور لافت، مناسبة للمناسبات والاستخدام اليومي.",
+
+        "Hawas Elixir":
+        "رائحة عميقة وأنيقة تمنح حضوراً مميزاً وثباتاً جيداً.",
+
+        "Hawas Atlantis":
+        "رائحة منعشة وعصرية، مناسبة لمحبي العطور ذات الطابع الحيوي.",
+
+        "Hawas Tropical":
+        "عطر بطابع منعش وحيوي يمنحك إحساساً مميزاً.",
+
+        "Hawas Ice":
+        "رائحة باردة ومنعشة بطابع عصري وأنيق.",
+
+        "Hawas Black":
+        "عطر بطابع أنيق وغامض، مناسب للمناسبات وللاستخدام اليومي.",
+
+        "Hawas Viper":
+        "رائحة جذابة بحضور واضح ولمسة عصرية.",
+
+        "Hawas Lava Gold":
+        "تركيبة فخمة بطابع دافئ وحضور قوي.",
+
+        "Hawas Fire":
+        "رائحة جريئة ودافئة لمحبي الحضور اللافت.",
+
+        "Hawas Majestic":
+        "عطر أنيق بطابع فاخر ومميز.",
+ 
+        "Hawas London":
+        "رائحة عصرية وأنيقة تناسب مختلف الأوقات.",
+
+        "Hawas Eclat":
+        "تركيبة ناعمة وأنيقة بطابع راقٍ.",
+
+        "Hawas Reina":
+        "رائحة مميزة بطابع أنيق وحضور لطيف.",
+
+        "Hawas Diva":
+        "عطر أنيق بطابع أنثوي مميز.",
+
+        "Hawas Pink":
+        "رائحة ناعمة ومنعشة بطابع لطيف وأنيق.",
+
+        "Hawas For Her":
+        "تركيبة أنيقة بطابع أنثوي مميز."
+
+    };
+
+
+    return descriptions[name]
+        ||
+        "منتج مميز من ATHAR STORE، اختره لتضيف لمستك الخاصة وتترك أثراً مميزاً.";
+
+}
+
+
+/* =====================================================
+   EXTRA IMAGES
+===================================================== */
+
+function getExtraImages(name,mainImage){
+
+    /*
+        لإضافة صور إضافية لأي منتج:
+
+        "Hawas Chrome":[
+            "Chrome-2.jpg",
+            "Chrome-3.jpg"
+        ]
+
+        مثال:
+
+        "Hawas Kobra":[
+            "kobra-2.jpg"
+        ]
+    */
+
+
+    const extraImages = {
+
+        /*
+        "Hawas Chrome":[
+            "Chrome-2.jpg",
+            "Chrome-3.jpg"
+        ],
+        */
+
+    };
+
+
+    return extraImages[name] || [];
+
+}
+
+
+/* =====================================================
+   OPEN PRODUCT PAGE
+===================================================== */
+
+function openProductPage(name,price,image){
+
+    const overlay =
+        document.getElementById(
+            "productPageOverlay"
+        );
+
+
+    const content =
+        document.getElementById(
+            "productPageContent"
+        );
+
+
+    if(!overlay || !content){
+        return;
+    }
+
+
+    const images=[];
+
+
+    if(image){
+        images.push(image);
+    }
+
+
+    getExtraImages(name,image)
+        .forEach(img=>{
+
+            if(
+                img &&
+                !images.includes(img)
+            ){
+
+                images.push(img);
+
+            }
+
+        });
+
+
+    const gallery =
+        images.length
+
+        ?
+
+        `
+
+        <div class="product-gallery">
+
+            <div class="product-main-image-wrap">
+
+                <img
+                    id="productPageMainImage"
+                    class="product-main-image"
+                    src="${images[0]}"
+                    alt="${escapeQuotes(name)}"
+                >
+
+            </div>
+
+
+            ${
+                images.length > 1
+
+                ?
+
+                `
+
+                <div class="product-thumbnails">
+
+                    ${
+                        images.map((img,i)=>`
+
+                            <button
+                                class="product-thumb ${i===0 ? "active" : ""}"
+                                type="button"
+                                onclick="
+                                    changeProductPageImage(
+                                        '${escapeQuotes(img)}',
+                                        this
+                                    )
+                                ">
+
+                                <img
+                                    src="${img}"
+                                    alt=""
+                                >
+
+                            </button>
+
+                        `).join("")
+                    }
+
+                </div>
+
+                `
+
+                :
+
+                ""
+
+            }
+
+        </div>
+
+        `
+
+        :
+
+        `
+
+        <div class="product-gallery">
+
+            <div class="product-main-image-wrap">
+
+                <div class="no-image">
+                    ATHAR STORE
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+
+    const priceText =
+        price===null
+        ?
+        "السعر حسب الطلب"
+        :
+        price+" ₪";
+
+
+    const whatsappText =
+        encodeURIComponent(
+            "مرحباً، أريد طلب: " +
+            name +
+            (
+                price===null
+                ?
+                ""
+                :
+                " - السعر: " +
+                price +
+                " ₪"
+            )
+        );
+
+
+    content.innerHTML = `
+
+        <div class="product-page-main">
+
+            ${gallery}
+
+
+            <div class="product-page-info">
+
+                <div class="product-page-label">
+                    ATHAR STORE
+                </div>
+
+
+                <h1 class="product-page-title">
+                    ${name}
+                </h1>
+
+
+                <div class="product-page-price">
+                    ${priceText}
+                </div>
+
+
+                <div class="product-page-description">
+                    ${getProductDescription(name)}
+                </div>
+
+
+                <div class="product-page-details">
+
+                    <div class="product-page-detail-row">
+
+                        <span>
+                            المنتج
+                        </span>
+
+                        <strong>
+                            ${name}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="product-page-detail-row">
+
+                        <span>
+                            التوفر
+                        </span>
+
+                        <strong>
+                            متوفر للطلب
+                        </strong>
+
+                    </div>
+
+
+                    <div class="product-page-detail-row">
+
+                        <span>
+                            التوصيل
+                        </span>
+
+                        <strong>
+                            الضفة والقدس — 20 ₪
+                        </strong>
+
+                    </div>
+
+
+                    <div class="product-page-detail-row">
+
+                        <span>
+                            التوصيل المجاني
+                        </span>
+
+                        <strong>
+                            للطلبات فوق 300 ₪
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-page-actions">
+
+                    <button
+                        class="product-page-add"
+                        type="button"
+                        onclick="
+                            addToCart(
+                                '${escapeQuotes(name)}',
+                                ${price===null ? "null" : price}
+                            );
+                            closeProductPage();
+                        ">
+
+                        أضف إلى السلة
+
+                    </button>
+
+
+                    <button
+                        class="product-page-whatsapp"
+                        type="button"
+                        onclick="
+                            window.open(
+                                'https://wa.me/972535474380?text=${whatsappText}',
+                                '_blank'
+                            )
+                        ">
+
+                        اطلب عبر واتساب
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    overlay.classList.add("show");
+
+    document.body.style.overflow="hidden";
+
+}
+
+
+/* =====================================================
+   CHANGE PRODUCT IMAGE
+===================================================== */
+
+function changeProductPageImage(src,button){
+
+    const main =
+        document.getElementById(
+            "productPageMainImage"
+        );
+
+
+    if(main){
+        main.src=src;
+    }
+
+
+    document
+        .querySelectorAll(".product-thumb")
+        .forEach(b=>{
+            b.classList.remove("active");
+        });
+
+
+    if(button){
+        button.classList.add("active");
+    }
+
+}
+
+
+/* =====================================================
+   CLOSE PRODUCT PAGE
+===================================================== */
+
+function closeProductPage(){
+
+    const overlay =
+        document.getElementById(
+            "productPageOverlay"
+        );
+
+
+    if(overlay){
+        overlay.classList.remove("show");
+    }
+
+
+    document.body.style.overflow="";
+
+}
+
+
+/* =====================================================
+   ESC KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key==="Escape"){
+            closeProductPage();
+        }
+
+    }
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+renderFeatured();
+
+renderOtherProducts();
+
+renderCups();
+
+renderGifts();
+
+renderPrinting();
+
+updateCart();
+
+</script>
+
+</body>
+</html>
